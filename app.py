@@ -12,3 +12,10 @@ api = Api(app)
 def hello():
     return 'f**k'
 
+
+class TApi(Resource):
+    def get(self, id):
+        return {'aaa': id}
+
+api.add_resource(TApi, '/<string:id>')
+
