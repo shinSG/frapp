@@ -3,19 +3,16 @@
 
 from flask import Flask
 from flask_restful import Resource, Api
-
-app = Flask(__name__)
-api = Api(app)
-
-
-@app.route('/')
-def hello():
-    return 'f**k'
+from flask_mongoengine import MongoEngine
+import config
 
 
-class TApi(Resource):
-    def get(self, id):
-        return {'aaa': id}
+web_site = Flask(__name__)
+api = Api(web_site)
+db = MongoEngine(web_site)
 
-api.add_resource(TApi, '/<string:id>')
+subapps = config.INSTALL_APPS
+
+for app in subapps:
+    api.add_resource(TApi, '/<string:id>')
 
